@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billline — Free Invoice Generator (No Sign Up, No Watermark)</title>
+  <meta name="description" content="Create, customize and download a professional PDF invoice in your browser. No sign up, no watermark, no upload — your data never leaves your device.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f766e'/%3E%3Cpath d='M9 10h14v2H9zm0 5h14v2H9zm0 5h9v2H9z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Billline</span>
+        <span class="brand-tag">Free invoice generator</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="btn-sample" class="btn btn-ghost">Load sample</button>
+        <button type="button" id="btn-reset" class="btn btn-ghost">New invoice</button>
+        <button type="button" id="btn-print" class="btn btn-primary">Download PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="layout">
+    <section class="editor" aria-label="Invoice editor">
+      <div class="panel">
+        <div class="panel-title-row">
+          <h2 class="panel-title">Your details</h2>
+          <label class="file-btn" for="logo-input">
+            <span id="logo-label">Add logo</span>
+            <input type="file" id="logo-input" accept="image/*" hidden>
+          </label>
+        </div>
+        <div id="logo-preview" class="logo-preview" hidden>
+          <img id="logo-img" alt="Uploaded logo" width="96" height="96">
+          <button type="button" id="logo-remove" class="btn btn-ghost btn-small">Remove logo</button>
+        </div>
+        <div class="field">
+          <label for="from-name">Company / your name</label>
+          <input type="text" id="from-name" autocomplete="organization" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="from-email">Email</label>
+          <input type="email" id="from-email" autocomplete="email" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="from-address">Address</label>
+          <textarea id="from-address" rows="3" maxlength="300"></textarea>
+        </div>
+        <div class="field">
+          <label for="from-phone">Phone</label>
+          <input type="tel" id="from-phone" autocomplete="tel" maxlength="40">
+        </div>
+        <div class="field">
+          <label for="from-vat">Tax / VAT ID <span class="optional">(optional)</span></label>
+          <input type="text" id="from-vat" maxlength="60">
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Bill to</h2>
+        <div class="field">
+          <label for="to-name">Client name</label>
+          <input type="text" id="to-name" autocomplete="off" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="to-email">Client email</label>
+          <input type="email" id="to-email" autocomplete="off" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="to-address">Client address</label>
+          <textarea id="to-address" rows="3" maxlength="300"></textarea>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Invoice details</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="inv-number">Invoice number</label>
+            <input type="text" id="inv-number" inputmode="text" maxlength="40">
+          </div>
+          <div class="field">
+            <label for="inv-currency">Currency</label>
+            <select id="inv-currency"></select>
+          </div>
+          <div class="field">
+            <label for="inv-issue">Issue date</label>
+            <input type="date" id="inv-issue">
+          </div>
+          <div class="field">
+            <label for="inv-due">Due date</label>
+            <input type="date" id="inv-due">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Line items</h2>
+        <div class="items-head" aria-hidden="true">
+          <span>Description</span><span>Qty</span><span>Rate</span><span>Amount</span><span></span>
+        </div>
+        <div id="items" class="items"></div>
+        <button type="button" id="btn-add-item" class="btn btn-ghost btn-small">+ Add line</button>
+
+        <div class="totals-editor">
+          <div class="grid-2">
+            <div class="field">
+              <label for="discount-type">Discount</label>
+              <div class="split">
+                <select id="discount-type" aria-label="Discount type">
+                  <option value="pct">%</option>
+                  <option value="fixed">Fixed</option>
+                </select>
+                <input type="number" id="discount-value" min="0" max="1000000" step="0.01" inputmode="decimal" aria-label="Discount value">
+              </div>
+            </div>
+            <div class="field">
+              <label for="tax-type">Tax</label>
+              <div class="split">
+                <select id="tax-type" aria-label="Tax type">
+                  <option value="pct">%</option>
+                  <option value="fixed">Fixed</option>
+                </select>
+                <input type="number" id="tax-value" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Tax value">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Payment details</h2>
+        <div class="field">
+          <label for="payment-info">Bank account, payment link, or instructions</label>
+          <textarea id="payment-info" rows="3" maxlength="600"></textarea>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">Notes &amp; terms</h2>
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" rows="3" maxlength="1000"></textarea>
+        </div>
+        <div class="field">
+          <label for="terms">Terms</label>
+          <textarea id="terms" rows="2" maxlength="1000"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-col" aria-label="Invoice preview">
+      <div class="preview-bar">
+        <span>Live preview</span>
+        <button type="button" id="btn-print-mobile" class="btn btn-primary btn-small">Download PDF</button>
+      </div>
+      <div id="sheet-scroll" class="sheet-scroll">
+        <div id="sheet" class="sheet" aria-label="Invoice preview content"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>100% private — everything runs in your browser and nothing is uploaded. Free forever, no watermark.</p>
+  </footer>
+
+  <script src="js/format.js"></script>
+  <script src="js/money.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
