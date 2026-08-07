@@ -72,6 +72,7 @@ Do NOT pick anything that:
 
 ## 5. Build requirements
 
+- UI Design Prompting: BEFORE making the website, you MUST write a prompt yourself in a text file focused on making an extremely premium, polished UI, and then work on it.
 - UI: clearly faster to use than the competitor — fewer clicks, less clutter,
   works well on mobile, loads fast (check real load time, not a guess)
 - Performance: benchmark against the competitor's live site (load time, time-to-interactive)
