@@ -26,6 +26,7 @@
     logoInput: $('logo-input'),
     logoImg: $('logo-img'),
     logoPreview: $('logo-preview'),
+    logoContent: $('logo-dropzone-content'),
     logoLabel: $('logo-label'),
     logoRemove: $('logo-remove')
   };
@@ -67,7 +68,9 @@
         '<input type="text" inputmode="decimal" class="item-qty" data-idx="' + idx + '" value="' + esc(it.qty) + '" placeholder="Qty" aria-label="Quantity">' +
         '<input type="text" inputmode="decimal" class="item-rate" data-idx="' + idx + '" value="' + esc(it.rate) + '" placeholder="Rate" aria-label="Unit rate">' +
         '<span class="item-amount">' + esc(itemAmount(idx)) + '</span>' +
-        '<button type="button" class="btn-remove" data-remove="' + idx + '" aria-label="Remove item">×</button>' +
+        '<button type="button" class="btn-icon" data-remove="' + idx + '" aria-label="Remove item">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>' +
+        '</button>' +
         '</div>';
     }).join('');
     els.items.innerHTML = html;
@@ -232,7 +235,7 @@
   });
 
   els.items.addEventListener('click', function (e) {
-    var btn = e.target.closest('.btn-remove');
+    var btn = e.target.closest('.btn-icon[data-remove]');
     if (!btn) return;
     var idx = parseInt(btn.getAttribute('data-remove'), 10);
     if (state.items.length > 1) {
@@ -286,11 +289,13 @@
     if (state.brand.logo) {
       els.logoImg.src = state.brand.logo;
       els.logoPreview.hidden = false;
-      els.logoLabel.textContent = 'Replace logo';
+      els.logoContent.hidden = true;
+      els.logoLabel.textContent = 'Upload New Logo';
     } else {
       els.logoPreview.hidden = true;
+      els.logoContent.hidden = false;
       els.logoImg.removeAttribute('src');
-      els.logoLabel.textContent = 'Add logo';
+      els.logoLabel.textContent = 'Upload Brand Logo';
     }
   }
 

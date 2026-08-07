@@ -3,10 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Billline — Free Invoice Generator (No Sign Up, No Watermark)</title>
-  <meta name="description" content="Create, customize and download a professional PDF invoice in your browser. No sign up, no watermark, no upload — your data never leaves your device.">
-  <meta name="theme-color" content="#0f766e">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f766e'/%3E%3Cpath d='M9 10h14v2H9zm0 5h14v2H9zm0 5h9v2H9z' fill='%23fff'/%3E%3C/svg%3E">
+  <title>Billline — Luxury In-Browser Invoice Generator</title>
+  <meta name="description" content="Create, customize and export high-end, professional PDF invoices in seconds. 100% private, no sign up, no watermark.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%230f172a'/%3E%3Cpath d='M9 10h14v2.5H9zm0 5.5h14v2.5H9zm0 5.5h9v2.5H9z' fill='%2310b981'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -15,160 +18,235 @@
   <header class="site-header">
     <div class="site-header-inner">
       <div class="brand">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-name">Billline</span>
-        <span class="brand-tag">Free invoice generator</span>
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Billline</span>
+          <span class="brand-badge">PRO</span>
+        </div>
       </div>
+
       <div class="header-actions">
-        <button type="button" id="btn-sample" class="btn btn-ghost">Load sample</button>
-        <button type="button" id="btn-reset" class="btn btn-ghost">New invoice</button>
-        <button type="button" id="btn-print" class="btn btn-primary">Download PDF</button>
+        <button type="button" id="btn-sample" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Load Demo
+        </button>
+        <button type="button" id="btn-reset" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+          New Draft
+        </button>
+        <button type="button" id="btn-print" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Export PDF
+        </button>
       </div>
     </div>
   </header>
 
   <main id="main" class="layout">
     <section class="editor" aria-label="Invoice editor">
+      <!-- Company Details Panel -->
       <div class="panel">
-        <div class="panel-title-row">
-          <h2 class="panel-title">Your details</h2>
-          <label class="file-btn" for="logo-input">
-            <span id="logo-label">Add logo</span>
+        <div class="panel-header">
+          <span class="eyebrow">Identity</span>
+          <h2 class="panel-title">Your Company Details</h2>
+        </div>
+        
+        <div class="logo-zone">
+          <label class="logo-dropzone" for="logo-input">
             <input type="file" id="logo-input" accept="image/*" hidden>
+            <div id="logo-dropzone-content" class="logo-drop-content">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <span id="logo-label">Upload Brand Logo</span>
+              <span class="logo-hint">PNG, JPG, SVG up to 1.5MB</span>
+            </div>
           </label>
+          <div id="logo-preview" class="logo-preview" hidden>
+            <img id="logo-img" alt="Uploaded brand logo">
+            <button type="button" id="logo-remove" class="btn-icon" aria-label="Remove logo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
         </div>
-        <div id="logo-preview" class="logo-preview" hidden>
-          <img id="logo-img" alt="Uploaded logo" width="96" height="96">
-          <button type="button" id="logo-remove" class="btn btn-ghost btn-small">Remove logo</button>
-        </div>
-        <div class="field">
-          <label for="from-name">Company / your name</label>
-          <input type="text" id="from-name" autocomplete="organization" maxlength="120">
-        </div>
-        <div class="field">
-          <label for="from-email">Email</label>
-          <input type="email" id="from-email" autocomplete="email" maxlength="120">
-        </div>
-        <div class="field">
-          <label for="from-address">Address</label>
-          <textarea id="from-address" rows="3" maxlength="300"></textarea>
-        </div>
-        <div class="field">
-          <label for="from-phone">Phone</label>
-          <input type="tel" id="from-phone" autocomplete="tel" maxlength="40">
-        </div>
-        <div class="field">
-          <label for="from-vat">Tax / VAT ID <span class="optional">(optional)</span></label>
-          <input type="text" id="from-vat" maxlength="60">
+
+        <div class="field-group">
+          <div class="field">
+            <label for="from-name">Company / Vendor Name</label>
+            <input type="text" id="from-name" placeholder="e.g. Acme Design Studio" autocomplete="organization" maxlength="120">
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="from-email">Email Address</label>
+              <input type="email" id="from-email" placeholder="billing@company.com" autocomplete="email" maxlength="120">
+            </div>
+            <div class="field">
+              <label for="from-phone">Phone Number</label>
+              <input type="tel" id="from-phone" placeholder="+1 (555) 019-2834" autocomplete="tel" maxlength="40">
+            </div>
+          </div>
+          <div class="field">
+            <label for="from-address">Full Address</label>
+            <textarea id="from-address" rows="2" placeholder="100 Innovation Way, Suite 400&#10;San Francisco, CA 94107" maxlength="300"></textarea>
+          </div>
+          <div class="field">
+            <label for="from-vat">Tax ID / VAT Registration <span class="optional">Optional</span></label>
+            <input type="text" id="from-vat" placeholder="e.g. US123456789 / EU987654321" maxlength="60">
+          </div>
         </div>
       </div>
 
+      <!-- Client Details Panel -->
       <div class="panel">
-        <h2 class="panel-title">Bill to</h2>
-        <div class="field">
-          <label for="to-name">Client name</label>
-          <input type="text" id="to-name" autocomplete="off" maxlength="120">
+        <div class="panel-header">
+          <span class="eyebrow">Billed To</span>
+          <h2 class="panel-title">Client Information</h2>
         </div>
-        <div class="field">
-          <label for="to-email">Client email</label>
-          <input type="email" id="to-email" autocomplete="off" maxlength="120">
-        </div>
-        <div class="field">
-          <label for="to-address">Client address</label>
-          <textarea id="to-address" rows="3" maxlength="300"></textarea>
+        <div class="field-group">
+          <div class="field">
+            <label for="to-name">Client or Company Name</label>
+            <input type="text" id="to-name" placeholder="e.g. Apex Global Corp" autocomplete="off" maxlength="120">
+          </div>
+          <div class="field">
+            <label for="to-email">Client Email</label>
+            <input type="email" id="to-email" placeholder="ap@apexglobal.com" autocomplete="off" maxlength="120">
+          </div>
+          <div class="field">
+            <label for="to-address">Billing Address</label>
+            <textarea id="to-address" rows="2" placeholder="742 Evergreen Terrace&#10;Springfield, OR 97477" maxlength="300"></textarea>
+          </div>
         </div>
       </div>
 
+      <!-- Metadata Panel -->
       <div class="panel">
-        <h2 class="panel-title">Invoice details</h2>
+        <div class="panel-header">
+          <span class="eyebrow">Invoice Metadata</span>
+          <h2 class="panel-title">Dates &amp; Currency</h2>
+        </div>
         <div class="grid-2">
           <div class="field">
-            <label for="inv-number">Invoice number</label>
-            <input type="text" id="inv-number" inputmode="text" maxlength="40">
+            <label for="inv-number">Invoice Number</label>
+            <input type="text" id="inv-number" placeholder="INV-2026-001" maxlength="40">
           </div>
           <div class="field">
             <label for="inv-currency">Currency</label>
-            <select id="inv-currency"></select>
+            <div class="select-wrapper">
+              <select id="inv-currency"></select>
+            </div>
           </div>
           <div class="field">
-            <label for="inv-issue">Issue date</label>
+            <label for="inv-issue">Issue Date</label>
             <input type="date" id="inv-issue">
           </div>
           <div class="field">
-            <label for="inv-due">Due date</label>
+            <label for="inv-due">Payment Due Date</label>
             <input type="date" id="inv-due">
           </div>
         </div>
       </div>
 
+      <!-- Line Items Panel -->
       <div class="panel">
-        <h2 class="panel-title">Line items</h2>
-        <div class="items-head" aria-hidden="true">
-          <span>Description</span><span>Qty</span><span>Rate</span><span>Amount</span><span></span>
+        <div class="panel-header flex-between">
+          <div>
+            <span class="eyebrow">Services &amp; Goods</span>
+            <h2 class="panel-title">Line Items</h2>
+          </div>
+          <button type="button" id="btn-add-item" class="btn btn-secondary btn-small">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add Line
+          </button>
         </div>
-        <div id="items" class="items"></div>
-        <button type="button" id="btn-add-item" class="btn btn-ghost btn-small">+ Add line</button>
 
-        <div class="totals-editor">
+        <div class="items-table-head" aria-hidden="true">
+          <span>Item Description</span>
+          <span class="center">Qty</span>
+          <span class="right">Rate</span>
+          <span class="right">Amount</span>
+          <span></span>
+        </div>
+        
+        <div id="items" class="items-list"></div>
+
+        <div class="totals-config">
           <div class="grid-2">
             <div class="field">
               <label for="discount-type">Discount</label>
-              <div class="split">
+              <div class="input-split">
                 <select id="discount-type" aria-label="Discount type">
-                  <option value="pct">%</option>
-                  <option value="fixed">Fixed</option>
+                  <option value="pct">% Percentage</option>
+                  <option value="fixed">Fixed Amount</option>
                 </select>
-                <input type="number" id="discount-value" min="0" max="1000000" step="0.01" inputmode="decimal" aria-label="Discount value">
+                <input type="number" id="discount-value" placeholder="0" min="0" max="1000000" step="0.01" inputmode="decimal" aria-label="Discount value">
               </div>
             </div>
             <div class="field">
-              <label for="tax-type">Tax</label>
-              <div class="split">
+              <label for="tax-type">Tax Rate</label>
+              <div class="input-split">
                 <select id="tax-type" aria-label="Tax type">
-                  <option value="pct">%</option>
-                  <option value="fixed">Fixed</option>
+                  <option value="pct">% Percentage</option>
+                  <option value="fixed">Fixed Amount</option>
                 </select>
-                <input type="number" id="tax-value" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Tax value">
+                <input type="number" id="tax-value" placeholder="0" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Tax value">
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Payment & Terms -->
       <div class="panel">
-        <h2 class="panel-title">Payment details</h2>
-        <div class="field">
-          <label for="payment-info">Bank account, payment link, or instructions</label>
-          <textarea id="payment-info" rows="3" maxlength="600"></textarea>
+        <div class="panel-header">
+          <span class="eyebrow">Settlement</span>
+          <h2 class="panel-title">Payment &amp; Terms</h2>
         </div>
-      </div>
-
-      <div class="panel">
-        <h2 class="panel-title">Notes &amp; terms</h2>
-        <div class="field">
-          <label for="notes">Notes</label>
-          <textarea id="notes" rows="3" maxlength="1000"></textarea>
-        </div>
-        <div class="field">
-          <label for="terms">Terms</label>
-          <textarea id="terms" rows="2" maxlength="1000"></textarea>
+        <div class="field-group">
+          <div class="field">
+            <label for="payment-info">Payment Instructions / Bank Wire Info</label>
+            <textarea id="payment-info" rows="2" placeholder="Bank: Silicon Valley Bank&#10;Routing / ABA: 121000358&#10;Account: 987654321" maxlength="600"></textarea>
+          </div>
+          <div class="field">
+            <label for="notes">Notes for Client</label>
+            <textarea id="notes" rows="2" placeholder="Thank you for choosing Acme Studio for your design needs!" maxlength="1000"></textarea>
+          </div>
+          <div class="field">
+            <label for="terms">Terms &amp; Conditions</label>
+            <textarea id="terms" rows="2" placeholder="Payment due within 14 days of issue date. Late payments subject to a 1.5% monthly fee." maxlength="1000"></textarea>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="preview-col" aria-label="Invoice preview">
-      <div class="preview-bar">
-        <span>Live preview</span>
-        <button type="button" id="btn-print-mobile" class="btn btn-primary btn-small">Download PDF</button>
+    <!-- Floating Live Preview Canvas -->
+    <section class="preview-col" aria-label="Invoice live preview">
+      <div class="preview-header">
+        <div class="preview-title-wrap">
+          <span class="live-pulse"></span>
+          <span class="preview-title">Realtime PDF Canvas</span>
+        </div>
+        <button type="button" id="btn-print-mobile" class="btn btn-primary btn-small">Export PDF</button>
       </div>
-      <div id="sheet-scroll" class="sheet-scroll">
-        <div id="sheet" class="sheet" aria-label="Invoice preview content"></div>
+
+      <div id="sheet-scroll" class="sheet-viewport">
+        <div id="sheet" class="sheet-paper" aria-label="Invoice print canvas"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>100% private — everything runs in your browser and nothing is uploaded. Free forever, no watermark.</p>
+    <div class="footer-inner">
+      <p class="privacy-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        100% Client-Side &amp; Private — Zero data uploaded to servers. Free forever without watermarks.
+      </p>
+    </div>
   </footer>
 
   <script src="js/format.js"></script>
