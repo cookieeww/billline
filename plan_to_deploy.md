@@ -17,7 +17,8 @@ This is a **weeks-to-months marathon project** (per operating contract). Web too
 
 ## 2. Hosting & Domain Setup
 
-- **Hosting Platform:** **Cloudflare Pages** (Free Tier).
+- **Live URL:** [https://cookieeww.github.io/billline/](https://cookieeww.github.io/billline/)
+- **GitHub Repository:** [https://github.com/cookieeww/billline](https://github.com/cookieeww/billline)
   - Unlimited bandwidth, global CDN, zero idle sleep (fully static HTML/CSS/JS), automated HTTPS.
   - Verification: Cloudflare Pages free tier supports static sites with unlimited bandwidth and custom domains at $0 ongoing cost.
 - **Domain Strategy:**
