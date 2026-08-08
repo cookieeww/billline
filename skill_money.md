@@ -73,7 +73,7 @@ Do NOT pick anything that:
 ## 5. Build requirements
 
 - UI Design Prompting: BEFORE making the website, you MUST write a prompt yourself in a text file focused on making an extremely premium, polished UI, and then work on it.
-- UI MUST be LUXURY AND MODERN, never plain white. The design MUST use: a rich deep color scheme (near-black/dark emerald/royal indigo/gold accents), layered gradients, subtle textures (grain/noise/dot patterns), soft realistic shadows, glassmorphism, generous spacing, and premium typography (display serif or refined sans). A plain white/grey "default bootstrap" look is a FAILING criterion — the UI must visibly look expensive and current.
+- UI MUST be LUXURY AND MODERN. Confirmed direction: LINEAR-STYLE minimal dark — flat near-black surfaces, hairline borders, ONE restrained accent color, zero decorative effects. Specifically: NO gradients, NO glow, NO glassmorphism, NO grain/noise, NO dot patterns, NO drop shadows on cards, NO serif display fonts, NO gaudy gold. Premium comes from restraint, spacing, typography, and consistency — not decoration. A plain-white default-bootstrap look and an over-decorated "template" look are BOTH failing criteria.
 - UI: clearly faster to use than the competitor — fewer clicks, less clutter,
   works well on mobile, loads fast (check real load time, not a guess)
 - Performance: benchmark against the competitor's live site (load time, time-to-interactive)
